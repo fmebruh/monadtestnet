@@ -119,6 +119,9 @@ The main menu allows you to choose from the following scripts:
     * Logs into Bima, requests tokens from the faucet, and supplies them as collateral.
     * Lends a random percentage (20-30%) of the bmBTC balance.
 
+
+JOIN FOR MORE - https://t.me/ChainScripters
+
 ### 14. Mint NFT Lil Chogstars
 * **Description**: Mints Lil Chogstars NFTs.
 * **Features**:
