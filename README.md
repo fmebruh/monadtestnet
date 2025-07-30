@@ -1,163 +1,126 @@
 # Monad Testnet Automation Scripts
 
-This repository contains a collection of Python scripts designed to automate various tasks on the Monad Testnet, including staking, swapping, deploying contracts, and sending transactions. The scripts are integrated with a central `main.py` file for easy navigation and execution, supporting multiple private keys and a user-friendly CLI interface
+This repository contains a collection of Python scripts designed to automate various tasks on the Monad Testnet. The scripts are integrated with a central `main.py` for easy execution of tasks like swapping, staking, and contract deployment.
 
-## Setup Instructions:
+## Getting Started
 
-- Python 3.7 or higher (recommended 3.9 or 3.10 due to `asyncio` usage).
-- `pip` (Python package installer)
+### Prerequisites
+* Python 3.7 or higher
+* `pip` (Python package installer)
 
-## Installation
-1. **Clone this repository:**
-- Open cmd or Shell, then run the command:
-```sh
-git clone https://github.com/BUpikgypbijpiv/monad-testnet-bot.git
-```
-```sh
-cd Monad-testnet-bot
-```
-2. **Install Dependencies:**
-- Open cmd or Shell, then run the command:
-```sh
-pip install -r requirements.txt
-```
-3. **Create Required Input Files:**
-- Create and open `pvkey.txt`: Add your private keys (one per line) in the root directory.
-```sh
-nano pvkey.txt 
-```
-- create and open `address.txt`(optional): Add recipient addresses (one per line) for `sendtx.py`.
-```sh
-nano address.txt 
-```
-4. **Run:**
-- Open cmd or Shell, then run command:
-```sh
-python main.py
-```
+### Installation
+1.  **Clone the repository:**
+    ```sh
+    git clone [https://github.com/fmebruh/monadtestnet.git](https://github.com/fmebruh/monadtestnet.git)
+    cd monadtestnet
+    ```
+2.  **Install dependencies:**
+    ```sh
+    pip install -r requirements.txt
+    ```
+3.  **Add Private Keys:**
+    Create a file named `pvkey.txt` in the root directory and add your private keys, one per line.
+    ```sh
+    nano pvkey.txt
+    ```
+4.  **Add Recipient Addresses (Optional):**
+    For sending transactions, create an `address.txt` file and add recipient addresses, one per line.
+    ```sh
+    nano address.txt
+    ```
+5.  **Run the main script:**
+    ```sh
+    python main.py
+    ```
 
+---
 
-## Features Overview
+## Scripts Overview
 
-### 2.Kintsu Staking
-- **Description**: Automates staking and unstaking MON tokens on the Kitsu Staking contract.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Random staking amounts (0.01-0.05 MON).
-  - Random delays (1-3 minutes) between actions.
-  - Stake and unstake cycles with detailed transaction logging.
-  - Bilingual output (Vietnamese/English).
-- **Usage**: Select from `main.py` menu, input number of cycles.
+The main menu allows you to choose from the following scripts:
 
-### 3.Bean Swap
-- **Description**: Automates swapping between MON and tokens (USDC, USDT, BEAN, JAI) on Bean Swap.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Random swaps (MON → Token or Token → MON).
-  - Configurable cycles and random delays (1-3 minutes).
-  - Balance checking before and after swaps.
-  - Detailed transaction logs with Tx Hash and explorer links.
-- **Usage**: Select from `main.py` menu, input cycles.
+### 1. Rubic Swap
+* **Description**: Swaps MON to USDT using the Rubic router.
+* **Features**:
+    * Takes a user-defined number of cycles to run.
+    * Wraps MON to WMON before swapping.
+    * Includes random delays between 60 and 180 seconds.
 
-### 4.Uniswap Swap
-- **Description**: Automates swapping between MON and tokens (DAC, USDT, WETH, MUK, USDC, CHOG) on Uniswap V2.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Random swaps (MON → Token or Token → MON).
-  - Configurable cycles and random delays (1-3 minutes).
-  - Balance checking before and after swaps.
-  - Detailed transaction logs with Tx Hash and explorer links.
-- **Usage**: Select from `main.py` menu, input cycles.
+### 2. Magma Staking
+* **Description**: Stakes MON and unstakes gMON on the Magma contract.
+* **Features**:
+    * Stakes a random amount between 0.01 and 0.05 MON.
+    * Waits for a random delay of 1-3 minutes between staking and unstaking.
 
-### 5.Contract Deployment
-- **Description**: Deploys a simple Counter contract to Monad Testnet.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - User input for contract name and symbol (e.g., "Thog Token", "THOG").
-  - Configurable deployment cycles with random delays (4-6 seconds).
-  - Displays contract address and Tx Hash after deployment.
-  - Bilingual output (Vietnamese/English).
-- **Usage**: Select from `main.py` menu, input cycles, then enter name and symbol for each deployment.
+### 3. Izumi Swap
+* **Description**: Wraps MON to WMON and unwraps it back using the Izumi contract.
+* **Features**:
+    * Uses a random amount between 0.01 and 0.05 MON for each cycle.
+    * Asynchronous operations for wrapping and unwrapping.
 
-### 6.Send Transactions
-- **Description**: Sends MON transactions to random addresses or addresses from a file.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Two modes:
-    - Send to random addresses (user-defined transaction count).
-    - Send to addresses from `address.txt`.
-  - Configurable MON amount (default 0.000001, max 999).
-  - Random delays (1-3 seconds) between transactions.
-  - Detailed logs including sender, receiver, amount, gas, block, and balance.
-- **Usage**: Select from `main.py` menu, input transaction count, amount, and mode.
+### 4. aPriori Staking
+* **Description**: A complete stake, unstake, and claim cycle on the aPriori Staking contract.
+* **Features**:
+    * Stakes a random amount of MON (0.01-0.05).
+    * Requests to unstake the corresponding aprMON.
+    * Waits 11 minutes before checking and claiming the unstaked MON.
 
-### 7.Ambient Swap Bot
-- **Description**: Automates token swapping on the Ambient DEX.
-- **Features**:
-  - Random Swap: Performs random swaps between USDC, USDT, and WETH with customizable amounts.
-  - Manual Swap: Allows users to select source/destination tokens and input amounts.
-  - Balance Checking: Displays MON and token balances (USDC, USDT, WETH).
-  - Retry Mechanism: Retries failed transactions up to 3 times with a 5-second delay for RPC errors.
-  - Extended Deadline: Swap transactions have a 1-hour deadline to avoid "Swap Deadline" errors.
-  - Interactive Menu: Offers a CLI menu to choose between Random Swap, Manual Swap, or Exit.
-- **Usage**: Select from `main.py` menu, choose Random/Manual mode, and follow prompts.
+### 5. Kintsu Staking
+* **Description**: Stakes MON and unstakes sMON on the Kitsu Staking contract.
+* **Features**:
+    * Stakes a random amount of MON (0.01-0.05).
+    * Unstakes the same amount after a random 1-3 minute delay.
 
-### 8.Rubic Swap Script
-- **Description**: Automates swapping MON to USDT via the Rubic router.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Configurable swap cycles with random amounts (0.01 MON).
-  - Random delays (1-3 minutes) between cycles and accounts.
-  - Transaction tracking with Tx Hash and explorer links.
-- **Usage**: Select from `main.py` menu, input number of cycles.
+### 6. Bean Swap
+* **Description**: Swaps MON with various tokens (USDC, USDT, BEAN, JAI) on Bean Swap.
+* **Features**:
+    * Randomly chooses between swapping MON to a token or a token back to MON.
+    * Uses random amounts between 0.001 and 0.01 MON for swaps.
 
-### 9.Monorail Transaction Script
-- **Description**: Sends predefined transactions to the Monorail contract.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Sends 0.1 MON transactions with custom data.
-  - Gas Estimation: Falls back to 500,000 if estimation fails.
-  - Explorer Links: Provides transaction links for tracking.
-  - Random delays (1-3 minutes) between accounts.
-- **Usage**: Select from `main.py` menu, runs automatically for all accounts.
+### 7. Monorail Swap
+* **Description**: Sends a predefined transaction to the Monorail contract.
+* **Features**:
+    * Sends a fixed 0.1 MON transaction with custom data.
+    * Estimates gas dynamically and includes a fallback.
 
-### 10.Apriori Staking
-- **Description**: Automates staking, unstaking, and claiming MON on the Apriori Staking contract.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Random staking amounts (0.01-0.05 MON).
-  - Configurable cycles with random delays (1-3 minutes) between actions.
-  - Stake → Unstake → Claim sequence with API check for claimable status.
-  - Detailed transaction logging with Tx Hash and explorer links.
-  - Bilingual output (Vietnamese/English).
-- **Usage**: Select from `main.py` menu, input number of cycles.
+### 8. Bebop Swap
+* **Description**: Wraps MON to WMON and unwraps it back via the Bebop contract.
+* **Features**:
+    * User provides a MON amount between 0.01 and 999 to wrap and unwrap.
+    * Synchronous operations.
 
-### 11.Bebop Wrap/Unwrap Script
-- **Description**: Wraps MON to WMON and unwraps WMON back to MON via the Bebop contract (synchronous version).
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - User-defined MON amounts (0.01-0.05) for wrapping/unwrapping.
-  - Configurable cycles with random delays (1-3 minutes).
-  - Transaction tracking with Tx Hash and explorer links.
-  - Bilingual output (Vietnamese/English).
-- **Usage**: Select from `main.py` menu, input number of cycles and MON amount.
+### 9. Ambient Finance Swap
+* **Description**: Swaps tokens on the Ambient DEX.
+* **Features**:
+    * Performs random swaps between a list of supported tokens including USDC, USDT, and WETH.
+    * Includes a retry mechanism for failed transactions.
 
-### 12.Izumi Wrap/Unwrap Script
-- **Description**: Wraps MON to WMON and unwraps WMON back to MON via the Izumi contract (asynchronous version).
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Random wrap/unwrap amounts (0.01-0.05 MON).
-  - Configurable cycles with random delays (1-3 minutes).
-  - Transaction tracking with Tx Hash and explorer links.
-  - Bilingual output (Vietnamese/English).
-- **Usage**: Select from `main.py` menu, input number of cycles.
+### 10. Uniswap Swap
+* **Description**: Swaps between MON and a list of tokens on Uniswap V2.
+* **Features**:
+    * Swaps MON to all supported tokens and then swaps them all back to MON in each cycle.
+    * Uses a random MON amount between 0.0001 and 0.01 for swaps.
 
-### 13.Magma Staking
-- **Description**: Automates staking MON and unstaking gMON on the Magma contract.
-- **Features**:
-  - Supports multiple private keys from `pvkey.txt`.
-  - Random staking amounts (0.01-0.05 MON).
-  - Configurable cycles with random delays (1-3 minutes) between stake/unstake.
-  - Transaction tracking with Tx Hash and explorer links.
-  - Bilingual output (Vietnamese/English).
-- **Usage**: Select from `main.py` menu, input number of cycles.
+### 11. Deploy Contract
+* **Description**: Deploys a simple `Counter` smart contract to the Monad Testnet.
+* **Features**:
+    * Prompts the user for a token name and symbol for the contract.
+    * Displays the transaction hash and the new contract address upon successful deployment.
+
+### 12. Send Random TX or File
+* **Description**: Sends MON transactions to either random addresses or a list of addresses from a file.
+* **Features**:
+    * User can choose to send to randomly generated addresses or addresses from `address.txt`.
+    * User defines the number of transactions and the amount of MON to send.
+
+### 13. Bima Deposit bmBTC
+* **Description**: Gets bmBTC from the faucet and deposits it as collateral on Bima Finance.
+* **Features**:
+    * Logs into Bima, requests tokens from the faucet, and supplies them as collateral.
+    * Lends a random percentage (20-30%) of the bmBTC balance.
+
+### 14. Mint NFT Lil Chogstars
+* **Description**: Mints Lil Chogstars NFTs.
+* **Features**:
+    * Mints a random number of NFTs for each account, between 1 and 3.
+    * Checks the existing balance to avoid minting more than the target amount.
